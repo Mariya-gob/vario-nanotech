@@ -6,7 +6,6 @@
     <title>ВАРИО НАНОТЕХ — высокотехнологичное оборудование</title>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet" />
     <style>
-        /* ===== СБРОС И БАЗА ===== */
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
@@ -47,15 +46,15 @@
         }
         .btn-primary:hover {
             background-color: var(--orange-hover);
-            transform: translateY(-2px);
-            box-shadow: 0 12px 28px rgba(242, 140, 40, 0.5);
+            transform: translateY(-3px);
+            box-shadow: 0 16px 40px rgba(242, 140, 40, 0.5);
         }
         .btn-outline {
             background: transparent;
             color: #FFFFFF;
             border: 2px solid #FFFFFF;
         }
-        .btn-outline:hover { background: rgba(255, 255, 255, 0.1); transform: translateY(-2px); }
+        .btn-outline:hover { background: rgba(255, 255, 255, 0.1); transform: translateY(-3px); }
 
         /* ===== ШАПКА ===== */
         .header {
@@ -77,7 +76,7 @@
         .hero {
             background: linear-gradient(145deg, #2C3E4E 0%, #1F2E3B 100%);
             color: #FFFFFF;
-            padding: 100px 0 120px;
+            padding: 80px 0 100px;
             position: relative;
             overflow: hidden;
         }
@@ -85,17 +84,23 @@
             content: '';
             position: absolute;
             top: -30%; right: -10%;
-            width: 500px; height: 500px;
+            width: 600px; height: 600px;
             background: radial-gradient(circle, rgba(242, 140, 40, 0.06) 0%, transparent 70%);
             border-radius: 50%;
         }
-        .hero-grid { display: flex; align-items: center; gap: 60px; flex-wrap: wrap; position: relative; z-index: 2; }
-        .hero-content { flex: 1 1 500px; }
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.1fr;
+            gap: 60px;
+            align-items: center;
+            position: relative;
+            z-index: 2;
+        }
         .hero-content h1 { font-size: 48px; font-weight: 900; line-height: 1.15; margin-bottom: 20px; }
         .hero-content h1 .highlight { color: var(--orange); }
-        .hero-content p { font-size: 20px; font-weight: 300; opacity: 0.85; margin-bottom: 30px; max-width: 500px; color: #C8D4DE; }
+        .hero-content > p { font-size: 20px; font-weight: 300; opacity: 0.85; margin-bottom: 30px; color: #C8D4DE; }
 
-        /* ===== МЕТРИКИ (НОВОЕ) ===== */
+        /* ===== МЕТРИКИ (выплывают) ===== */
         .hero-metrics {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
@@ -105,13 +110,27 @@
             border-top: 1px solid rgba(255,255,255,0.1);
             border-bottom: 1px solid rgba(255,255,255,0.1);
         }
+        .hero-metric {
+            opacity: 0;
+            transform: translateY(15px);
+            animation: metricFadeIn 0.6s ease forwards;
+        }
+        .hero-metric:nth-child(1) { animation-delay: 0.2s; }
+        .hero-metric:nth-child(2) { animation-delay: 0.4s; }
+        .hero-metric:nth-child(3) { animation-delay: 0.6s; }
+        .hero-metric:nth-child(4) { animation-delay: 0.8s; }
+        @keyframes metricFadeIn {
+            to { opacity: 1; transform: translateY(0); }
+        }
         .hero-metric-value {
-            font-size: 30px;
+            font-size: 32px;
             font-weight: 900;
             color: var(--orange);
             line-height: 1;
             margin-bottom: 6px;
+            transition: transform 0.3s;
         }
+        .hero-metric:hover .hero-metric-value { transform: scale(1.1); }
         .hero-metric-label {
             font-size: 12px;
             color: rgba(255,255,255,0.65);
@@ -122,73 +141,194 @@
 
         .hero-buttons { display: flex; gap: 20px; flex-wrap: wrap; }
 
-        /* ===== SCAN-МОДЕЛЬ (НОВОЕ) ===== */
-        .hero-image {
-            flex: 1 1 300px;
-            background: rgba(255, 255, 255, 0.04);
-            border-radius: 20px;
-            min-height: 320px;
-            padding: 24px;
-            border: 1px solid rgba(242, 140, 40, 0.2);
-            position: relative;
+        /* ===== СКАН-ПАНЕЛЬ (ваша модель) ===== */
+        .scan-panel {
+            background: #1F2E3B;
+            border-radius: 16px;
+            padding: 0;
             overflow: hidden;
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(242, 140, 40, 0.15);
+            animation: panelBreath 6s ease-in-out infinite;
+            position: relative;
         }
-        .scan-header {
+        @keyframes panelBreath {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.015); }
+        }
+
+        .scan-panel-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 18px;
-            padding-bottom: 14px;
-            border-bottom: 1px solid rgba(255,255,255,0.1);
-            font-size: 13px;
+            padding: 16px 24px;
+            border-bottom: 1px solid rgba(242, 140, 40, 0.15);
+            background: rgba(0,0,0,0.15);
         }
-        .scan-title { font-weight: 700; color: #FFFFFF; }
-        .scan-status { display: flex; align-items: center; gap: 6px; color: var(--orange); font-weight: 600; font-size: 11px; }
-        .scan-status .dot {
-            width: 6px; height: 6px; border-radius: 50%;
+        .scan-title {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 13px;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            color: #FFFFFF;
+        }
+        .scan-title .dot {
+            width: 8px; height: 8px; border-radius: 50%;
             background: var(--orange);
             animation: pulseDot 1.5s ease-in-out infinite;
+            box-shadow: 0 0 12px var(--orange);
         }
         @keyframes pulseDot {
-            0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(242,140,40,0.6); }
-            50% { opacity: 0.6; box-shadow: 0 0 0 6px rgba(242,140,40,0); }
+            0%, 100% { opacity: 1; box-shadow: 0 0 12px var(--orange); }
+            50% { opacity: 0.5; box-shadow: 0 0 20px var(--orange); }
         }
-        .scan-viewport {
-            height: 100px;
-            background: rgba(0,0,0,0.2);
-            border: 1px solid rgba(79, 195, 247, 0.2);
-            border-radius: 10px;
+        .scan-ch { font-size: 12px; color: rgba(255,255,255,0.5); font-family: 'Roboto', monospace; }
+
+        .scan-panel-body {
             position: relative;
+            height: 280px;
+            background: 
+                linear-gradient(rgba(242, 140, 40, 0.04) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(242, 140, 40, 0.04) 1px, transparent 1px),
+                radial-gradient(circle at 50% 50%, rgba(242, 140, 40, 0.12) 0%, transparent 60%),
+                #1A2735;
+            background-size: 40px 40px, 40px 40px, 100% 100%, 100% 100%;
             overflow: hidden;
-            margin-bottom: 16px;
         }
-        .scan-viewport::after {
+
+        /* Волновое поле (SVG) */
+        .scan-waves {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+        }
+        .scan-waves path {
+            fill: none;
+            stroke: var(--orange);
+            stroke-width: 1.2;
+            opacity: 0.5;
+        }
+
+        /* Пульсирующий центр */
+        .scan-center {
+            position: absolute;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            width: 120px; height: 120px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(242, 140, 40, 0.5) 0%, rgba(242, 140, 40, 0.1) 40%, transparent 70%);
+            animation: centerPulse 3s ease-in-out infinite;
+        }
+        .scan-center::after {
             content: '';
             position: absolute;
             top: 50%; left: 50%;
-            width: 130%; height: 2px;
-            background: linear-gradient(90deg, transparent, var(--orange), transparent);
             transform: translate(-50%, -50%);
-            animation: scanBeam 3.5s ease-in-out infinite;
+            width: 60px; height: 60px;
+            border-radius: 50%;
+            border: 1px solid rgba(242, 140, 40, 0.6);
+            animation: ringPulse 3s ease-in-out infinite;
         }
-        @keyframes scanBeam {
-            0%, 100% { transform: translate(-50%, -50%) rotate(-6deg); opacity: 0.5; }
-            50% { transform: translate(-50%, -50%) rotate(6deg); opacity: 1; }
+        @keyframes centerPulse {
+            0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.8; }
+            50% { transform: translate(-50%, -50%) scale(1.15); opacity: 1; }
         }
-        .scan-grid-bg {
+        @keyframes ringPulse {
+            0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.6; }
+            50% { transform: translate(-50%, -50%) scale(1.4); opacity: 0; }
+        }
+
+        /* Линия сканирования */
+        .scan-beam {
             position: absolute;
-            inset: 0;
-            background-image: 
-                linear-gradient(rgba(79, 195, 247, 0.07) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(79, 195, 247, 0.07) 1px, transparent 1px);
-            background-size: 20px 20px;
+            top: 0; left: 0; right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--orange), transparent);
+            animation: beamDown 4s ease-in-out infinite;
+            box-shadow: 0 0 20px var(--orange);
+            opacity: 0.7;
         }
-        .scan-data { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-        .scan-item { padding: 8px 12px; background: rgba(255,255,255,0.03); border-radius: 8px; border-left: 2px solid var(--orange); }
-        .scan-item.blue { border-left-color: #4FC3F7; }
-        .scan-item .label { font-size: 9px; text-transform: uppercase; letter-spacing: 1px; color: rgba(255,255,255,0.5); margin-bottom: 3px; }
-        .scan-item .value { font-size: 14px; font-weight: 700; color: #FFFFFF; font-family: monospace; }
-        .scan-item .value.live { color: var(--orange); }
+        @keyframes beamDown {
+            0%, 100% { top: 0; opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { top: 100%; opacity: 0; }
+        }
+
+        /* Уголки рамки */
+        .scan-corner {
+            position: absolute;
+            width: 16px; height: 16px;
+            border: 2px solid var(--orange);
+            opacity: 0.8;
+        }
+        .scan-corner.tl { top: 16px; left: 16px; border-right: none; border-bottom: none; }
+        .scan-corner.tr { top: 16px; right: 16px; border-left: none; border-bottom: none; }
+        .scan-corner.bl { bottom: 16px; left: 16px; border-right: none; border-top: none; }
+        .scan-corner.br { bottom: 16px; right: 16px; border-left: none; border-top: none; }
+
+        /* Координаты X и Y */
+        .scan-coord {
+            position: absolute;
+            font-family: monospace;
+            font-size: 13px;
+            color: #FFFFFF;
+            background: rgba(0,0,0,0.4);
+            padding: 4px 10px;
+            border-radius: 4px;
+            border-left: 2px solid var(--orange);
+        }
+        .scan-coord.x { bottom: 12px; left: 24px; }
+        .scan-coord.y { bottom: 12px; right: 24px; }
+        .scan-coord .accent { color: var(--orange); font-weight: 700; }
+
+        /* Вертикальная шкала слева */
+        .scan-scale {
+            position: absolute;
+            left: 24px;
+            top: 50%;
+            transform: translateY(-50%);
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+        .scan-scale span {
+            width: 2px;
+            height: 8px;
+            background: var(--orange);
+            opacity: 0.4;
+        }
+        .scan-scale span:nth-child(3) { height: 16px; opacity: 0.8; }
+        .scan-scale span:nth-child(5) { height: 16px; opacity: 0.8; }
+
+        /* Нижние метрики панели */
+        .scan-panel-footer {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            border-top: 1px solid rgba(242, 140, 40, 0.15);
+            background: rgba(0,0,0,0.2);
+        }
+        .scan-stat {
+            padding: 16px 20px;
+            border-right: 1px solid rgba(242, 140, 40, 0.1);
+        }
+        .scan-stat:last-child { border-right: none; }
+        .scan-stat .label {
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: rgba(255,255,255,0.5);
+            margin-bottom: 4px;
+        }
+        .scan-stat .value {
+            font-size: 18px;
+            font-weight: 700;
+            color: #FFFFFF;
+            font-family: monospace;
+        }
+        .scan-stat .value.live { color: var(--orange); }
 
         /* ===== ОБЩИЕ БЛОКИ ===== */
         .section { padding: 80px 0; }
@@ -230,7 +370,7 @@
         .card h3 { font-size: 20px; margin-bottom: 12px; color: var(--graphite-dark); }
         .card p { color: #5A6F82; font-weight: 300; font-size: 15px; }
 
-        /* ===== ПРОДУКТЫ (НОВОЕ) ===== */
+        /* ===== ПРОДУКТЫ ===== */
         .products-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -241,13 +381,13 @@
             border: 1px solid var(--gray-border);
             border-radius: 20px;
             overflow: hidden;
-            transition: all 0.35s ease;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             box-shadow: 0 2px 12px rgba(44, 62, 78, 0.05);
         }
         .product-card:hover {
-            transform: translateY(-8px);
+            transform: translateY(-10px) scale(1.02);
             border-color: var(--orange);
-            box-shadow: 0 20px 50px rgba(242, 140, 40, 0.12);
+            box-shadow: 0 25px 60px rgba(242, 140, 40, 0.2);
         }
         .product-image {
             height: 140px;
@@ -257,13 +397,16 @@
             justify-content: center;
             font-size: 56px;
             position: relative;
+            transition: transform 0.4s;
         }
+        .product-card:hover .product-image { transform: scale(1.05); }
         .product-image::after {
             content: '';
             position: absolute;
             inset: 0;
             background: radial-gradient(circle at 70% 30%, rgba(242, 140, 40, 0.15), transparent 60%);
         }
+        .product-body { padding: 26px 28px; }
         .product-tag {
             display: inline-block;
             font-size: 11px;
@@ -273,20 +416,8 @@
             color: var(--orange);
             margin-bottom: 8px;
         }
-        .product-body { padding: 26px 28px; }
-        .product-card h3 {
-            font-size: 22px;
-            font-weight: 700;
-            color: var(--graphite-dark);
-            margin-bottom: 10px;
-        }
-        .product-card p {
-            color: #5A6F82;
-            font-size: 14px;
-            font-weight: 300;
-            margin-bottom: 18px;
-            line-height: 1.6;
-        }
+        .product-card h3 { font-size: 22px; font-weight: 700; color: var(--graphite-dark); margin-bottom: 10px; }
+        .product-card p { color: #5A6F82; font-size: 14px; font-weight: 300; margin-bottom: 18px; line-height: 1.6; }
         .product-spec {
             display: flex;
             justify-content: space-between;
@@ -305,9 +436,9 @@
             text-decoration: none;
             transition: transform 0.3s;
         }
-        .product-link:hover { transform: translateX(5px); }
+        .product-link:hover { transform: translateX(6px); }
 
-        /* ===== ОБЛАСТИ ПРИМЕНЕНИЯ ===== */
+        /* ===== ОБЛАСТИ ===== */
         .grid-6 { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 25px; }
         .app-card {
             background: #FFFFFF;
@@ -323,17 +454,11 @@
             transform: translateY(-4px);
             box-shadow: 0 8px 24px rgba(242, 140, 40, 0.08);
         }
-        .app-card .num {
-            font-size: 28px;
-            font-weight: 900;
-            color: var(--orange);
-            opacity: 0.35;
-            display: block;
-        }
+        .app-card .num { font-size: 28px; font-weight: 900; color: var(--orange); opacity: 0.35; display: block; }
         .app-card h4 { margin: 10px 0 8px; font-size: 18px; color: var(--graphite-dark); }
         .app-card p { font-size: 13px; color: #5A6F82; }
 
-        /* ===== ГЕОГРАФИЯ (ИНТЕРАКТИВНАЯ) ===== */
+        /* ===== ГЕОГРАФИЯ ===== */
         .geo-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 50px; align-items: center; }
         .geo-map {
             background: linear-gradient(145deg, #2C3E4E 0%, #1F2E3B 100%);
@@ -348,7 +473,6 @@
             overflow: hidden;
         }
         .geo-map svg { width: 100%; height: auto; max-height: 280px; }
-
         .geo-list { display: grid; grid-template-columns: 1fr 1fr; gap: 15px 30px; }
         .geo-item {
             display: flex;
@@ -359,7 +483,7 @@
             border-radius: 12px;
             border-left: 3px solid var(--orange);
             box-shadow: 0 2px 8px rgba(44, 62, 78, 0.04);
-            transition: 0.2s;
+            transition: 0.25s;
             cursor: pointer;
         }
         .geo-item:hover, .geo-item.active {
@@ -399,12 +523,8 @@
         .partner-card .partner-name { font-size: 14px; font-weight: 600; color: var(--graphite-dark); letter-spacing: 0.3px; }
         .partner-card .partner-desc { font-size: 11px; color: #8A9FB0; margin-top: 4px; }
 
-        /* ===== СЕРТИФИКАТЫ (НОВОЕ) ===== */
-        .certs-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 24px;
-        }
+        /* ===== СЕРТИФИКАТЫ ===== */
+        .certs-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 24px; }
         .cert-card {
             background: #FFFFFF;
             border: 1px solid var(--gray-border);
@@ -417,28 +537,12 @@
             transform: translateY(-5px);
             box-shadow: 0 12px 32px rgba(242, 140, 40, 0.08);
         }
-        .cert-code {
-            font-size: 13px;
-            font-weight: 700;
-            color: var(--orange);
-            letter-spacing: 1.5px;
-            margin-bottom: 10px;
-        }
-        .cert-title {
-            font-size: 16px;
-            font-weight: 700;
-            color: var(--graphite-dark);
-            margin-bottom: 8px;
-            line-height: 1.3;
-        }
+        .cert-code { font-size: 13px; font-weight: 700; color: var(--orange); letter-spacing: 1.5px; margin-bottom: 10px; }
+        .cert-title { font-size: 16px; font-weight: 700; color: var(--graphite-dark); margin-bottom: 8px; line-height: 1.3; }
         .cert-desc { font-size: 13px; color: #5A6F82; font-weight: 300; }
 
-        /* ===== ПРОЦЕСС (НОВОЕ) ===== */
-        .process-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 24px;
-        }
+        /* ===== ПРОЦЕСС ===== */
+        .process-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 24px; }
         .process-step {
             background: #FFFFFF;
             border: 1px solid var(--gray-border);
@@ -451,14 +555,7 @@
             transform: translateY(-5px);
             box-shadow: 0 12px 32px rgba(242, 140, 40, 0.08);
         }
-        .process-num {
-            font-size: 32px;
-            font-weight: 900;
-            color: var(--orange);
-            opacity: 0.25;
-            line-height: 1;
-            margin-bottom: 14px;
-        }
+        .process-num { font-size: 32px; font-weight: 900; color: var(--orange); opacity: 0.25; line-height: 1; margin-bottom: 14px; }
         .process-step h4 { font-size: 17px; color: var(--graphite-dark); margin-bottom: 8px; }
         .process-step p { font-size: 14px; color: #5A6F82; font-weight: 300; }
 
@@ -477,18 +574,23 @@
 
         /* ===== АДАПТИВ ===== */
         @media (max-width: 992px) {
+            .hero-grid { grid-template-columns: 1fr; }
+            .hero-content { text-align: center; }
+            .hero-content > p { margin-left: auto; margin-right: auto; }
+            .hero-buttons { justify-content: center; }
+            .hero-metrics { grid-template-columns: repeat(2, 1fr); }
             .geo-grid { grid-template-columns: 1fr; gap: 30px; }
             .geo-map { min-height: 220px; }
-            .hero-metrics { grid-template-columns: repeat(2, 1fr); }
         }
         @media (max-width: 768px) {
             .hero-content h1 { font-size: 32px; }
             .header .container { flex-direction: column; gap: 15px; }
             .nav-menu { justify-content: center; gap: 15px; }
-            .hero { padding: 60px 0; }
+            .hero { padding: 50px 0; }
             .section-title { font-size: 28px; }
             .geo-list { grid-template-columns: 1fr; gap: 10px; }
             .partners-grid { grid-template-columns: repeat(2, 1fr); gap: 15px; }
+            .scan-panel-body { height: 220px; }
         }
         @media (max-width: 480px) {
             .hero-content h1 { font-size: 26px; }
@@ -496,9 +598,10 @@
             .hero-buttons { flex-direction: column; }
             .partners-grid { grid-template-columns: 1fr 1fr; gap: 12px; }
             .partner-card { padding: 15px 10px; min-height: 80px; }
-            .geo-item { padding: 10px 14px; }
             .hero-metrics { grid-template-columns: 1fr 1fr; gap: 12px; }
             .hero-metric-value { font-size: 24px; }
+            .scan-panel-body { height: 180px; }
+            .scan-panel-footer { grid-template-columns: 1fr; }
         }
 
         /* ===== АНИМАЦИЯ ПОЯВЛЕНИЯ ===== */
@@ -522,7 +625,7 @@
         </div>
     </header>
 
-    <!-- ===== ГЛАВНЫЙ ЭКРАН (HERO) ===== -->
+    <!-- ===== HERO ===== -->
     <section class="hero">
         <div class="container hero-grid">
             <div class="hero-content">
@@ -535,21 +638,20 @@
                     и промышленного применения.
                 </p>
 
-                <!-- МЕТРИКИ (НОВОЕ) -->
                 <div class="hero-metrics">
-                    <div>
+                    <div class="hero-metric">
                         <div class="hero-metric-value">15+</div>
                         <div class="hero-metric-label">лет<br>на рынке</div>
                     </div>
-                    <div>
+                    <div class="hero-metric">
                         <div class="hero-metric-value">240+</div>
                         <div class="hero-metric-label">поставленных<br>установок</div>
                     </div>
-                    <div>
+                    <div class="hero-metric">
                         <div class="hero-metric-value">38</div>
                         <div class="hero-metric-label">регионов<br>поставок</div>
                     </div>
-                    <div>
+                    <div class="hero-metric">
                         <div class="hero-metric-value">40+</div>
                         <div class="hero-metric-label">методик<br>измерений</div>
                     </div>
@@ -561,38 +663,61 @@
                 </div>
             </div>
 
-            <!-- SCAN-МОДЕЛЬ (НОВОЕ) -->
-            <div class="hero-image">
-                <div class="scan-header">
-                    <div class="scan-title">ScanPro Vario XE · Live</div>
-                    <div class="scan-status"><span class="dot"></span>СКАНИРОВАНИЕ</div>
+            <!-- ===== СКАН-ПАНЕЛЬ (ваша модель) ===== -->
+            <div class="scan-panel">
+                <div class="scan-panel-header">
+                    <div class="scan-title">
+                        <span class="dot"></span>
+                        SCANPRO VARIO XE · LIVE
+                    </div>
+                    <div class="scan-ch">CH-01 / 0.05nm</div>
                 </div>
-                <div class="scan-viewport">
-                    <div class="scan-grid-bg"></div>
+
+                <div class="scan-panel-body">
+                    <!-- Волны -->
+                    <svg class="scan-waves" viewBox="0 0 600 280" preserveAspectRatio="xMidYMid slice">
+                        <path d="M 80 140 Q 150 120, 220 140 T 360 140 T 500 140" />
+                        <path d="M 80 160 Q 150 140, 220 160 T 360 160 T 500 160" />
+                        <path d="M 100 120 Q 170 100, 240 120 T 380 120 T 520 120" />
+                        <path d="M 60 170 Q 140 155, 220 170 T 380 170 T 540 170" />
+                        <path d="M 120 100 Q 200 85, 280 100 T 440 100 T 560 100" />
+                        <path d="M 40 190 Q 140 175, 240 190 T 440 190 T 560 190" />
+                    </svg>
+
+                    <!-- Пульсирующий центр -->
+                    <div class="scan-center"></div>
+
+                    <!-- Линия сканирования -->
+                    <div class="scan-beam"></div>
+
+                    <!-- Уголки -->
+                    <div class="scan-corner tl"></div>
+                    <div class="scan-corner tr"></div>
+                    <div class="scan-corner bl"></div>
+                    <div class="scan-corner br"></div>
+
+                    <!-- Вертикальная шкала -->
+                    <div class="scan-scale">
+                        <span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+                    </div>
+
+                    <!-- Координаты -->
+                    <div class="scan-coord x">X: <span class="accent" id="live-x">042.18</span> µm</div>
+                    <div class="scan-coord y">Y: <span class="accent" id="live-y">017.92</span> µm</div>
                 </div>
-                <div class="scan-data">
-                    <div class="scan-item">
-                        <div class="label">CH-01</div>
-                        <div class="value live" id="live-res">0.050 нм</div>
+
+                <!-- Нижние метрики -->
+                <div class="scan-panel-footer">
+                    <div class="scan-stat">
+                        <div class="label">Z-NOISE</div>
+                        <div class="value live" id="live-noise">0.04 nm</div>
                     </div>
-                    <div class="scan-item blue">
-                        <div class="label">Z-noise</div>
-                        <div class="value" id="live-noise">0.040 нм</div>
-                    </div>
-                    <div class="scan-item">
-                        <div class="label">X-позиция</div>
-                        <div class="value" id="live-x">042.18 µm</div>
-                    </div>
-                    <div class="scan-item blue">
-                        <div class="label">Y-позиция</div>
-                        <div class="value" id="live-y">017.92 µm</div>
-                    </div>
-                    <div class="scan-item">
-                        <div class="label">Поле сканирования</div>
+                    <div class="scan-stat">
+                        <div class="label">SCAN</div>
                         <div class="value">100×100 µm</div>
                     </div>
-                    <div class="scan-item blue">
-                        <div class="label">Режим</div>
+                    <div class="scan-stat">
+                        <div class="label">MODE</div>
                         <div class="value">AC-AM</div>
                     </div>
                 </div>
@@ -627,7 +752,7 @@
         </div>
     </section>
 
-    <!-- ===== ПРОДУКТОВАЯ ЛИНЕЙКА (НОВОЕ) ===== -->
+    <!-- ===== ПРОДУКТЫ ===== -->
     <section class="section section-alt" id="products">
         <div class="container">
             <h2 class="section-title">Продуктовая <span class="accent-color">линейка</span></h2>
@@ -640,9 +765,9 @@
                     <div class="product-body">
                         <span class="product-tag">Флагман</span>
                         <h3>ScanPro Vario XE</h3>
-                        <p>Универсальная система анализа состава материалов и топографии поверхности для лабораторий и промышленности.</p>
+                        <p>Универсальная система анализа состава материалов и топографии поверхности.</p>
                         <div class="product-spec"><span class="label">Разрешение</span><span class="value">0.05 нм</span></div>
-                        <div class="product-spec"><span class="label">Поле сканирования</span><span class="value">100×100 µm</span></div>
+                        <div class="product-spec"><span class="label">Поле</span><span class="value">100×100 µm</span></div>
                         <a href="#contacts" class="product-link">Подобрать конфигурацию →</a>
                     </div>
                 </div>
@@ -652,7 +777,7 @@
                     <div class="product-body">
                         <span class="product-tag">Спектроскопия</span>
                         <h3>SpectraQuant Q7</h3>
-                        <p>Спектрометр комбинационного рассеяния и фотолюминесценции для химического анализа на наноуровне.</p>
+                        <p>Спектрометр комбинационного рассеяния и фотолюминесценции для химического анализа.</p>
                         <div class="product-spec"><span class="label">Спектр. разрешение</span><span class="value">&lt; 0.1 см⁻¹</span></div>
                         <div class="product-spec"><span class="label">Лазеры</span><span class="value">473/532/633 нм</span></div>
                         <a href="#contacts" class="product-link">Подобрать конфигурацию →</a>
@@ -664,7 +789,7 @@
                     <div class="product-body">
                         <span class="product-tag">Зондовая микроскопия</span>
                         <h3>VarioTrace ProbeStation</h3>
-                        <p>Модульная станция для сканирующей зондовой микроскопии (АСМ/СТМ) с открытой архитектурой и апгрейдом.</p>
+                        <p>Модульная станция для сканирующей зондовой микроскопии (АСМ/СТМ).</p>
                         <div class="product-spec"><span class="label">Разрешение X/Y</span><span class="value">0.5 нм</span></div>
                         <div class="product-spec"><span class="label">Режимы</span><span class="value">Contact / Tapping</span></div>
                         <a href="#contacts" class="product-link">Подобрать конфигурацию →</a>
@@ -674,7 +799,7 @@
         </div>
     </section>
 
-    <!-- ===== ОБЛАСТИ ПРИМЕНЕНИЯ ===== -->
+    <!-- ===== ОБЛАСТИ ===== -->
     <section class="section" id="industries">
         <div class="container">
             <h2 class="section-title">Ключевые области <span class="accent-color">применения</span></h2>
@@ -692,12 +817,12 @@
         </div>
     </section>
 
-    <!-- ===== НАША ГЕОГРАФИЯ (ИНТЕРАКТИВНАЯ) ===== -->
+    <!-- ===== ГЕОГРАФИЯ ===== -->
     <section class="section section-alt" id="geo">
         <div class="container">
             <h2 class="section-title">Наша <span class="accent-color">география</span></h2>
             <div class="orange-divider"></div>
-            <p class="section-subtitle">Регионы поставок и присутствия оборудования ВАРИО НАНОТЕХ</p>
+            <p class="section-subtitle">Регионы поставок и присутствия оборудования</p>
 
             <div class="geo-grid">
                 <div class="geo-map">
@@ -706,65 +831,59 @@
                         <text x="105" y="80" text-anchor="middle" fill="rgba(242,140,40,0.4)" font-size="10" font-family="Roboto, sans-serif">Европа</text>
                         <circle cx="95" cy="65" r="4" fill="#F28C28" opacity="0.7"/>
                         <circle cx="125" cy="75" r="3" fill="#F28C28" opacity="0.5"/>
-
                         <rect x="170" y="20" width="110" height="90" rx="12" fill="rgba(242,140,40,0.04)" stroke="rgba(242,140,40,0.15)" stroke-width="1.5"/>
                         <text x="225" y="75" text-anchor="middle" fill="rgba(242,140,40,0.35)" font-size="10" font-family="Roboto, sans-serif">Азия</text>
                         <circle cx="210" cy="55" r="4" fill="#F28C28" opacity="0.7"/>
                         <circle cx="240" cy="45" r="3" fill="#F28C28" opacity="0.5"/>
-                        <circle cx="260" cy="65" r="3.5" fill="#F28C28" opacity="0.6"/>
-
                         <rect x="310" y="60" width="70" height="60" rx="10" fill="rgba(242,140,40,0.03)" stroke="rgba(242,140,40,0.12)" stroke-width="1.5"/>
                         <text x="345" y="100" text-anchor="middle" fill="rgba(242,140,40,0.3)" font-size="9" font-family="Roboto, sans-serif">СНГ</text>
                         <circle cx="330" cy="85" r="3.5" fill="#F28C28" opacity="0.6"/>
-
                         <line x1="105" y1="75" x2="180" y2="50" stroke="rgba(242,140,40,0.15)" stroke-width="1" stroke-dasharray="4,4"/>
-                        <line x1="140" y1="80" x2="200" y2="60" stroke="rgba(242,140,40,0.15)" stroke-width="1" stroke-dasharray="4,4"/>
                         <line x1="230" y1="70" x2="320" y2="85" stroke="rgba(242,140,40,0.15)" stroke-width="1" stroke-dasharray="4,4"/>
-
                         <circle cx="105" cy="55" r="6" fill="none" stroke="#F28C28" stroke-width="2" opacity="0.5"/>
                         <circle cx="105" cy="55" r="3" fill="#F28C28" opacity="0.9"/>
                     </svg>
                 </div>
 
-                <div class="geo-list" id="geo-list">
-                    <div class="geo-item active" data-region="moscow">
+                <div class="geo-list">
+                    <div class="geo-item active">
                         <span class="flag">🇷🇺</span>
                         <div><div class="region">Москва, Зеленоград</div><div class="country">Россия — головной офис</div></div>
                     </div>
-                    <div class="geo-item" data-region="spb">
-                        <span class="flag">🇷🇺</span>
-                        <div><div class="region">Санкт-Петербург</div><div class="country">Северо-Запад</div></div>
-                    </div>
-                    <div class="geo-item" data-region="novosib">
-                        <span class="flag">🇷🇺</span>
-                        <div><div class="region">Новосибирск</div><div class="country">Сибирь</div></div>
-                    </div>
-                    <div class="geo-item" data-region="ekb">
-                        <span class="flag">🇷🇺</span>
-                        <div><div class="region">Екатеринбург</div><div class="country">Урал</div></div>
-                    </div>
-                    <div class="geo-item" data-region="kazan">
-                        <span class="flag">🇷🇺</span>
-                        <div><div class="region">Казань</div><div class="country">Приволжье</div></div>
-                    </div>
-                    <div class="geo-item" data-region="astana">
+                    <div class="geo-item">
                         <span class="flag">🇰🇿</span>
                         <div><div class="region">Астана, Алматы</div><div class="country">Казахстан</div></div>
                     </div>
-                    <div class="geo-item" data-region="minsk">
+                    <div class="geo-item">
                         <span class="flag">🇧🇾</span>
                         <div><div class="region">Минск</div><div class="country">Беларусь</div></div>
                     </div>
-                    <div class="geo-item" data-region="tashkent">
+                    <div class="geo-item">
                         <span class="flag">🇺🇿</span>
                         <div><div class="region">Ташкент</div><div class="country">Узбекистан</div></div>
+                    </div>
+                    <div class="geo-item">
+                        <span class="flag">🇨🇳</span>
+                        <div><div class="region">Пекин, Шанхай</div><div class="country">Китай</div></div>
+                    </div>
+                    <div class="geo-item">
+                        <span class="flag">🇮🇳</span>
+                        <div><div class="region">Мумбаи, Дели</div><div class="country">Индия</div></div>
+                    </div>
+                    <div class="geo-item">
+                        <span class="flag">🇩🇪</span>
+                        <div><div class="region">Берлин, Мюнхен</div><div class="country">Германия</div></div>
+                    </div>
+                    <div class="geo-item">
+                        <span class="flag">🇹🇷</span>
+                        <div><div class="region">Стамбул, Анкара</div><div class="country">Турция</div></div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- ===== НАШИ ПАРТНЕРЫ ===== -->
+    <!-- ===== ПАРТНЕРЫ ===== -->
     <section class="section">
         <div class="container">
             <h2 class="section-title">Наши <span class="accent-color">партнеры</span></h2>
@@ -772,51 +891,19 @@
             <p class="section-subtitle">Компании и организации, доверяющие нашим решениям</p>
 
             <div class="partners-grid">
-                <div class="partner-card reveal">
-                    <div class="logo-placeholder">🏛️</div>
-                    <div class="partner-name">Росатом</div>
-                    <div class="partner-desc">Госкорпорация</div>
-                </div>
-                <div class="partner-card reveal">
-                    <div class="logo-placeholder">🧪</div>
-                    <div class="partner-name">НИЦ «Курчатовский институт»</div>
-                    <div class="partner-desc">Научный центр</div>
-                </div>
-                <div class="partner-card reveal">
-                    <div class="logo-placeholder">⚡</div>
-                    <div class="partner-name">Роснефть</div>
-                    <div class="partner-desc">Нефтегазовая компания</div>
-                </div>
-                <div class="partner-card reveal">
-                    <div class="logo-placeholder">🧬</div>
-                    <div class="partner-name">БиоТех</div>
-                    <div class="partner-desc">Биотехнологический холдинг</div>
-                </div>
-                <div class="partner-card reveal">
-                    <div class="logo-placeholder">🔭</div>
-                    <div class="partner-name">МГУ им. Ломоносова</div>
-                    <div class="partner-desc">Научно-исследовательский институт</div>
-                </div>
-                <div class="partner-card reveal">
-                    <div class="logo-placeholder">🏗️</div>
-                    <div class="partner-name">Северсталь</div>
-                    <div class="partner-desc">Металлургическая компания</div>
-                </div>
-                <div class="partner-card reveal">
-                    <div class="logo-placeholder">💊</div>
-                    <div class="partner-name">ФармСтандарт</div>
-                    <div class="partner-desc">Фармацевтический завод</div>
-                </div>
-                <div class="partner-card reveal">
-                    <div class="logo-placeholder">🛢️</div>
-                    <div class="partner-name">Газпром</div>
-                    <div class="partner-desc">Энергетическая компания</div>
-                </div>
+                <div class="partner-card reveal"><div class="logo-placeholder">🏛️</div><div class="partner-name">Росатом</div><div class="partner-desc">Госкорпорация</div></div>
+                <div class="partner-card reveal"><div class="logo-placeholder">🧪</div><div class="partner-name">НИЦ «Курчатовский институт»</div><div class="partner-desc">Научный центр</div></div>
+                <div class="partner-card reveal"><div class="logo-placeholder">⚡</div><div class="partner-name">Роснефть</div><div class="partner-desc">Нефтегазовая компания</div></div>
+                <div class="partner-card reveal"><div class="logo-placeholder">🧬</div><div class="partner-name">БиоТех</div><div class="partner-desc">Биотехнологический холдинг</div></div>
+                <div class="partner-card reveal"><div class="logo-placeholder">🔭</div><div class="partner-name">МГУ им. Ломоносова</div><div class="partner-desc">Научно-исследовательский институт</div></div>
+                <div class="partner-card reveal"><div class="logo-placeholder">🏗️</div><div class="partner-name">Северсталь</div><div class="partner-desc">Металлургическая компания</div></div>
+                <div class="partner-card reveal"><div class="logo-placeholder">💊</div><div class="partner-name">ФармСтандарт</div><div class="partner-desc">Фармацевтический завод</div></div>
+                <div class="partner-card reveal"><div class="logo-placeholder">🛢️</div><div class="partner-name">Газпром</div><div class="partner-desc">Энергетическая компания</div></div>
             </div>
         </div>
     </section>
 
-    <!-- ===== СЕРТИФИКАТЫ (НОВОЕ) ===== -->
+    <!-- ===== СЕРТИФИКАТЫ ===== -->
     <section class="section section-alt">
         <div class="container">
             <h2 class="section-title">Подтверждённая <span class="accent-color">компетенция</span></h2>
@@ -824,31 +911,15 @@
             <p class="section-subtitle">Документы и сертификаты, подтверждающие метрологию и качество</p>
 
             <div class="certs-grid">
-                <div class="cert-card reveal">
-                    <div class="cert-code">ISO 9001:2015</div>
-                    <div class="cert-title">Система менеджмента качества</div>
-                    <div class="cert-desc">Международный стандарт качества производства и обслуживания.</div>
-                </div>
-                <div class="cert-card reveal">
-                    <div class="cert-code">ГОСТ Р 8.595</div>
-                    <div class="cert-title">Метрологическая прослеживаемость</div>
-                    <div class="cert-desc">Соответствие государственным требованиям к измерениям.</div>
-                </div>
-                <div class="cert-card reveal">
-                    <div class="cert-code">GMP</div>
-                    <div class="cert-title">Совместимость с чистыми зонами</div>
-                    <div class="cert-desc">Соответствие требованиям фармацевтического производства.</div>
-                </div>
-                <div class="cert-card reveal">
-                    <div class="cert-code">ISO 14644-1</div>
-                    <div class="cert-title">Чистые помещения, класс 5</div>
-                    <div class="cert-desc">Работа в контролируемых условиях без загрязнений.</div>
-                </div>
+                <div class="cert-card reveal"><div class="cert-code">ISO 9001:2015</div><div class="cert-title">Система менеджмента качества</div><div class="cert-desc">Международный стандарт качества производства и обслуживания.</div></div>
+                <div class="cert-card reveal"><div class="cert-code">ГОСТ Р 8.595</div><div class="cert-title">Метрологическая прослеживаемость</div><div class="cert-desc">Соответствие государственным требованиям к измерениям.</div></div>
+                <div class="cert-card reveal"><div class="cert-code">GMP</div><div class="cert-title">Совместимость с чистыми зонами</div><div class="cert-desc">Соответствие требованиям фармацевтического производства.</div></div>
+                <div class="cert-card reveal"><div class="cert-code">ISO 14644-1</div><div class="cert-title">Чистые помещения, класс 5</div><div class="cert-desc">Работа в контролируемых условиях без загрязнений.</div></div>
             </div>
         </div>
     </section>
 
-    <!-- ===== КАК МЫ РАБОТАЕМ (НОВОЕ) ===== -->
+    <!-- ===== ПРОЦЕСС ===== -->
     <section class="section" id="process">
         <div class="container">
             <h2 class="section-title">Как мы начинаем <span class="accent-color">проект</span></h2>
@@ -856,26 +927,10 @@
             <p class="section-subtitle">Полный цикл — от постановки задачи до внедрения</p>
 
             <div class="process-grid">
-                <div class="process-step reveal">
-                    <div class="process-num">01</div>
-                    <h4>Запрос и технический бриф</h4>
-                    <p>Определяем цели проекта, объект анализа, требования к точности и сценарии применения.</p>
-                </div>
-                <div class="process-step reveal">
-                    <div class="process-num">02</div>
-                    <h4>Подбор конфигурации и КП</h4>
-                    <p>Формируем концепцию решения и подбираем оборудование под вашу задачу.</p>
-                </div>
-                <div class="process-step reveal">
-                    <div class="process-num">03</div>
-                    <h4>Договор и сроки производства</h4>
-                    <p>Согласовываем сроки, производим и настраиваем оборудование под заказ.</p>
-                </div>
-                <div class="process-step reveal">
-                    <div class="process-num">04</div>
-                    <h4>Шеф-монтаж и пусконаладка</h4>
-                    <p>Устанавливаем, обучаем операторов и сопровождаем эксплуатацию.</p>
-                </div>
+                <div class="process-step reveal"><div class="process-num">01</div><h4>Запрос и технический бриф</h4><p>Определяем цели проекта, объект анализа, требования к точности.</p></div>
+                <div class="process-step reveal"><div class="process-num">02</div><h4>Подбор конфигурации и КП</h4><p>Формируем концепцию решения и подбираем оборудование.</p></div>
+                <div class="process-step reveal"><div class="process-num">03</div><h4>Договор и сроки производства</h4><p>Согласовываем сроки, производим и настраиваем оборудование.</p></div>
+                <div class="process-step reveal"><div class="process-num">04</div><h4>Шеф-монтаж и пусконаладка</h4><p>Устанавливаем, обучаем операторов и сопровождаем эксплуатацию.</p></div>
             </div>
         </div>
     </section>
@@ -886,7 +941,6 @@
             <div>
                 <h5>ООО «ВАРИО НАНОТЕХ»</h5>
                 <p style="font-size: 14px; opacity: 0.7;">Разработка и производство высокотехнологичного оборудования</p>
-                <p style="font-size: 14px; opacity: 0.5; margin-top: 8px;">Серый · Оранжевый</p>
             </div>
             <div>
                 <h5>Контакты</h5>
@@ -902,42 +956,36 @@
         </div>
     </footer>
 
-    <!-- ===== JS: ЖИВЫЕ ЦИФРЫ, ГЕОГРАФИЯ, АНИМАЦИИ ===== -->
+    <!-- ===== JS ===== -->
     <script>
-    // ===== ЖИВЫЕ ЦИФРЫ В SCAN-МОДЕЛИ =====
+    // Живые цифры
     (function() {
-        const resEl = document.getElementById('live-res');
         const noiseEl = document.getElementById('live-noise');
         const xEl = document.getElementById('live-x');
         const yEl = document.getElementById('live-y');
-        if (!resEl) return;
-
+        if (!noiseEl) return;
         function update() {
-            resEl.textContent = (0.045 + Math.random() * 0.01).toFixed(3) + ' нм';
-            noiseEl.textContent = (0.03 + Math.random() * 0.02).toFixed(3) + ' нм';
+            noiseEl.textContent = (0.03 + Math.random() * 0.02).toFixed(2) + ' nm';
             const x = (40 + Math.random() * 5).toFixed(2);
-            xEl.textContent = String(x).padStart(6, '0') + ' µm';
+            xEl.textContent = String(x).padStart(6, '0');
             const y = (15 + Math.random() * 5).toFixed(2);
-            yEl.textContent = String(y).padStart(6, '0') + ' µm';
+            yEl.textContent = String(y).padStart(6, '0');
         }
         setInterval(update, 1800);
         update();
     })();
 
-    // ===== ИНТЕРАКТИВНАЯ ГЕОГРАФИЯ =====
+    // География
     (function() {
-        const items = document.querySelectorAll('.geo-item');
-        if (!items.length) return;
-        items.forEach(item => {
+        document.querySelectorAll('.geo-item').forEach(item => {
             item.addEventListener('click', () => {
-                items.forEach(i => i.classList.remove('active'));
+                document.querySelectorAll('.geo-item').forEach(i => i.classList.remove('active'));
                 item.classList.add('active');
-                // Здесь можно добавить логику обновления карты, если нужно
             });
         });
     })();
 
-    // ===== АНИМАЦИИ ПОЯВЛЕНИЯ =====
+    // Появление при скролле
     (function() {
         const reveals = document.querySelectorAll('.reveal');
         if (!reveals.length) return;
