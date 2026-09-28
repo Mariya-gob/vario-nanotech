@@ -322,23 +322,23 @@
             filter: drop-shadow(0 0 4px var(--orange));
         }
 
-        /* ===== КРУТЫЕ ТОЧКИ ГОРОДОВ ===== */
+                /* ===== КРУТЫЕ ТОЧКИ ГОРОДОВ ===== */
         .city-point {
             cursor: pointer;
-            transition: transform 0.3s;
         }
 
         /* Ядро — яркая точка */
         .city-point .core {
             fill: var(--orange);
             filter: drop-shadow(0 0 8px var(--orange)) drop-shadow(0 0 16px rgba(242, 140, 40, 0.6));
-            transition: all 0.3s;
+            transition: all 0.3s ease;
         }
 
         /* Ореол — пульсирующий круг */
         .city-point .halo {
             fill: rgba(242, 140, 40, 0.2);
             animation: haloPulse 3s ease-in-out infinite;
+            transition: all 0.3s ease;
         }
 
         /* Расходящееся кольцо */
@@ -356,6 +356,7 @@
             stroke-width: 1.2;
             opacity: 0.5;
             animation: rayPulse 3s ease-in-out infinite;
+            transition: all 0.3s ease;
         }
         .city-point .ray.diag {
             stroke-width: 0.8;
@@ -371,11 +372,7 @@
         .city-point:nth-child(3n) .ring { animation-delay: 1s; }
         .city-point:nth-child(3n) .ray { animation-delay: 1s; }
 
-        /* HOVER: точка увеличивается, лучи удлиняются */
-        .city-point:hover {
-            transform: scale(1.3);
-            transform-origin: center;
-        }
+        /* HOVER: вспышка без смещения (без дрожания!) */
         .city-point:hover .core {
             fill: #FFB74D;
             filter: drop-shadow(0 0 16px var(--orange)) drop-shadow(0 0 32px rgba(242, 140, 40, 0.9));
@@ -391,6 +388,14 @@
         @keyframes haloPulse {
             0%, 100% { r: 10; opacity: 0.5; }
             50% { r: 16; opacity: 0.9; }
+        }
+        @keyframes ringExpand {
+            0% { r: 6; opacity: 0.8; stroke-width: 2; }
+            100% { r: 28; opacity: 0; stroke-width: 0.5; }
+        }
+        @keyframes rayPulse {
+            0%, 100% { opacity: 0.4; }
+            50% { opacity: 0.8; }
         }
         @keyframes ringExpand {
             0% { r: 6; opacity: 0.8; stroke-width: 2; }
