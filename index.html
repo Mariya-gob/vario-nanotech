@@ -322,23 +322,30 @@
             filter: drop-shadow(0 0 4px var(--orange));
         }
 
-                /* ===== КРУТЫЕ ТОЧКИ ГОРОДОВ ===== */
+                        /* ===== КРУТЫЕ ТОЧКИ ГОРОДОВ (БЕЗ ДРОЖАНИЯ) ===== */
         .city-point {
             cursor: pointer;
+        }
+
+        /* Отключаем перехват курсора у всех дочерних элементов */
+        .city-point .core,
+        .city-point .halo,
+        .city-point .ring,
+        .city-point .ray {
+            pointer-events: none;
         }
 
         /* Ядро — яркая точка */
         .city-point .core {
             fill: var(--orange);
-            filter: drop-shadow(0 0 8px var(--orange)) drop-shadow(0 0 16px rgba(242, 140, 40, 0.6));
-            transition: all 0.3s ease;
+            transition: fill 0.3s ease, stroke 0.3s ease;
         }
 
         /* Ореол — пульсирующий круг */
         .city-point .halo {
             fill: rgba(242, 140, 40, 0.2);
             animation: haloPulse 3s ease-in-out infinite;
-            transition: all 0.3s ease;
+            transition: fill 0.3s ease;
         }
 
         /* Расходящееся кольцо */
@@ -356,7 +363,7 @@
             stroke-width: 1.2;
             opacity: 0.5;
             animation: rayPulse 3s ease-in-out infinite;
-            transition: all 0.3s ease;
+            transition: opacity 0.3s ease, stroke-width 0.3s ease;
         }
         .city-point .ray.diag {
             stroke-width: 0.8;
@@ -372,17 +379,18 @@
         .city-point:nth-child(3n) .ring { animation-delay: 1s; }
         .city-point:nth-child(3n) .ray { animation-delay: 1s; }
 
-        /* HOVER: вспышка без смещения (без дрожания!) */
+        /* HOVER: вспышка через заливку и обводку (без filter → нет дрожания) */
         .city-point:hover .core {
             fill: #FFB74D;
-            filter: drop-shadow(0 0 16px var(--orange)) drop-shadow(0 0 32px rgba(242, 140, 40, 0.9));
+            stroke: var(--orange);
+            stroke-width: 2;
         }
         .city-point:hover .ray {
             opacity: 1;
             stroke-width: 1.8;
         }
         .city-point:hover .halo {
-            fill: rgba(242, 140, 40, 0.4);
+            fill: rgba(242, 140, 40, 0.45);
         }
 
         @keyframes haloPulse {
@@ -397,15 +405,6 @@
             0%, 100% { opacity: 0.4; }
             50% { opacity: 0.8; }
         }
-        @keyframes ringExpand {
-            0% { r: 6; opacity: 0.8; stroke-width: 2; }
-            100% { r: 28; opacity: 0; stroke-width: 0.5; }
-        }
-        @keyframes rayPulse {
-            0%, 100% { opacity: 0.4; }
-            50% { opacity: 0.8; }
-        }
-
         /* Подсказка */
         .geo-tooltip {
             position: absolute;
