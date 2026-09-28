@@ -188,7 +188,7 @@
         .scan-stat .label { font-size: 10px; text-transform: uppercase; letter-spacing: 1.5px; color: rgba(255,255,255,0.5); margin-bottom: 4px; }
         .scan-stat .value { font-size: 18px; font-weight: 700; color: #FFFFFF; font-family: monospace; }
         .scan-stat .value.live { color: var(--orange); }
-
+        
         /* ===== ОБЩИЕ БЛОКИ ===== */
         .section { padding: 80px 0; }
         .section-alt { background-color: var(--gray-bg); }
@@ -255,226 +255,95 @@
         .app-card h4 { margin: 10px 0 8px; font-size: 18px; color: var(--graphite-dark); }
         .app-card p { font-size: 13px; color: #5A6F82; }
 
-            <!-- ===== ГЕОГРАФИЯ С КАРТОЙ РОССИИ ===== -->
-    <section class="section section-alt" id="geo">
-        <div class="container">
-            <h2 class="section-title">Наша <span class="accent-color">география</span></h2>
-            <div class="orange-divider"></div>
-            <p class="section-subtitle">38 регионов присутствия. Наведите на точку, чтобы узнать подробности</p>
+        /* ===== ГЕОГРАФИЯ С КАРТОЙ РОССИИ ===== */
+        .geo-grid { display: grid; grid-template-columns: 1.3fr 1fr; gap: 50px; align-items: center; }
 
-            <div class="geo-grid">
-                <!-- КАРТА РОССИИ (SVG-файл, перекрашен в графит) -->
-                <div class="geo-map-wrapper" id="geo-map-wrapper">
-                    <img class="russia-map-bg" src="russia.svg" alt="Карта России" />
-                    
-                    <div class="russia-map-overlay">
-                        <svg class="russia-map-svg" viewBox="0 0 1000 600" xmlns="http://www.w3.org/2000/svg">
-                            <g id="network">
-                                <line class="network-line" data-from="moscow" data-to="spb" x1="130" y1="270" x2="136" y2="182" />
-                                <line class="network-line" data-from="moscow" data-to="kazan" x1="130" y1="270" x2="220" y2="260" />
-                                <line class="network-line" data-from="moscow" data-to="ekb" x1="130" y1="270" x2="330" y2="240" />
-                                <line class="network-line" data-from="moscow" data-to="novosib" x1="130" y1="270" x2="480" y2="240" />
-                                <line class="network-line" data-from="moscow" data-to="krasnodar" x1="130" y1="270" x2="110" y2="350" />
-                                <line class="network-line" data-from="spb" data-to="kazan" x1="136" y1="182" x2="220" y2="260" />
-                                <line class="network-line" data-from="ekb" data-to="novosib" x1="330" y1="240" x2="480" y2="240" />
-                                <line class="network-line" data-from="novosib" data-to="krasnoyarsk" x1="480" y1="240" x2="560" y2="230" />
-                                <line class="network-line" data-from="krasnoyarsk" data-to="irkutsk" x1="560" y1="230" x2="640" y2="240" />
-                                <line class="network-line" data-from="irkutsk" data-to="vladivostok" x1="640" y1="240" x2="820" y2="280" />
-                                <line class="network-line" data-from="kazan" data-to="ekb" x1="220" y1="260" x2="330" y2="240" />
-                            </g>
-
-                            <g class="city-point" data-city="Москва, Зеленоград" data-info="Головной офис · 64 установки">
-                                <circle class="hitbox" cx="130" cy="270" r="22" />
-                                <line class="ray" x1="130" y1="252" x2="130" y2="288" />
-                                <line class="ray" x1="112" y1="270" x2="148" y2="270" />
-                                <line class="ray diag" x1="117" y1="257" x2="143" y2="283" />
-                                <line class="ray diag" x1="143" y1="257" x2="117" y2="283" />
-                                <circle class="ring" cx="130" cy="270" r="6" />
-                                <circle class="halo" cx="130" cy="270" r="11" />
-                                <circle class="core" cx="130" cy="270" r="5" />
-                            </g>
-                            <g class="city-point" data-city="Санкт-Петербург" data-info="Северо-Запад · 38 установок">
-                                <circle class="hitbox" cx="136" cy="182" r="20" />
-                                <line class="ray" x1="136" y1="167" x2="136" y2="197" />
-                                <line class="ray" x1="121" y1="182" x2="151" y2="182" />
-                                <circle class="ring" cx="136" cy="182" r="5" />
-                                <circle class="halo" cx="136" cy="182" r="9" />
-                                <circle class="core" cx="136" cy="182" r="4" />
-                            </g>
-                            <g class="city-point" data-city="Казань" data-info="Приволжье · 35 установок">
-                                <circle class="hitbox" cx="220" cy="260" r="20" />
-                                <line class="ray" x1="220" y1="245" x2="220" y2="275" />
-                                <line class="ray" x1="205" y1="260" x2="235" y2="260" />
-                                <circle class="ring" cx="220" cy="260" r="5" />
-                                <circle class="halo" cx="220" cy="260" r="9" />
-                                <circle class="core" cx="220" cy="260" r="4" />
-                            </g>
-                            <g class="city-point" data-city="Екатеринбург" data-info="Урал · 31 установка">
-                                <circle class="hitbox" cx="330" cy="240" r="20" />
-                                <line class="ray" x1="330" y1="225" x2="330" y2="255" />
-                                <line class="ray" x1="315" y1="240" x2="345" y2="240" />
-                                <circle class="ring" cx="330" cy="240" r="5" />
-                                <circle class="halo" cx="330" cy="240" r="9" />
-                                <circle class="core" cx="330" cy="240" r="4" />
-                            </g>
-                            <g class="city-point" data-city="Новосибирск" data-info="Сибирь · 42 установки">
-                                <circle class="hitbox" cx="480" cy="240" r="20" />
-                                <line class="ray" x1="480" y1="225" x2="480" y2="255" />
-                                <line class="ray" x1="465" y1="240" x2="495" y2="240" />
-                                <line class="ray diag" x1="470" y1="230" x2="490" y2="250" />
-                                <circle class="ring" cx="480" cy="240" r="5" />
-                                <circle class="halo" cx="480" cy="240" r="9" />
-                                <circle class="core" cx="480" cy="240" r="4" />
-                            </g>
-                            <g class="city-point" data-city="Красноярск" data-info="Сибирь · 18 установок">
-                                <circle class="hitbox" cx="560" cy="230" r="18" />
-                                <line class="ray" x1="560" y1="217" x2="560" y2="243" />
-                                <line class="ray" x1="547" y1="230" x2="573" y2="230" />
-                                <circle class="ring" cx="560" cy="230" r="4" />
-                                <circle class="halo" cx="560" cy="230" r="8" />
-                                <circle class="core" cx="560" cy="230" r="3.5" />
-                            </g>
-                            <g class="city-point" data-city="Иркутск" data-info="Сибирь · 12 установок">
-                                <circle class="hitbox" cx="640" cy="240" r="18" />
-                                <line class="ray" x1="640" y1="227" x2="640" y2="253" />
-                                <line class="ray" x1="627" y1="240" x2="653" y2="240" />
-                                <circle class="ring" cx="640" cy="240" r="4" />
-                                <circle class="halo" cx="640" cy="240" r="8" />
-                                <circle class="core" cx="640" cy="240" r="3.5" />
-                            </g>
-                            <g class="city-point" data-city="Владивосток" data-info="Дальний Восток · 9 установок">
-                                <circle class="hitbox" cx="820" cy="280" r="18" />
-                                <line class="ray" x1="820" y1="267" x2="820" y2="293" />
-                                <line class="ray" x1="807" y1="280" x2="833" y2="280" />
-                                <circle class="ring" cx="820" cy="280" r="4" />
-                                <circle class="halo" cx="820" cy="280" r="8" />
-                                <circle class="core" cx="820" cy="280" r="3.5" />
-                            </g>
-                            <g class="city-point" data-city="Краснодар" data-info="Юг · 22 установки">
-                                <circle class="hitbox" cx="110" cy="350" r="18" />
-                                <line class="ray" x1="110" y1="337" x2="110" y2="363" />
-                                <line class="ray" x1="97" y1="350" x2="123" y2="350" />
-                                <circle class="ring" cx="110" cy="350" r="4" />
-                                <circle class="halo" cx="110" cy="350" r="8" />
-                                <circle class="core" cx="110" cy="350" r="3.5" />
-                            </g>
-                        </svg>
-                    </div>
-
-                    <div class="geo-tooltip" id="geo-tooltip">
-                        <span class="city"></span>
-                        <span class="info"></span>
-                    </div>
-                </div>
-
-                <div class="geo-list" id="geo-list">
-                    <div class="geo-item active" data-city="Москва, Зеленоград">
-                        <span class="flag">🇷🇺</span>
-                        <div><div class="region">Москва, Зеленоград</div><div class="country">Центральный · 64</div></div>
-                    </div>
-                    <div class="geo-item" data-city="Санкт-Петербург">
-                        <span class="flag">🇷🇺</span>
-                        <div><div class="region">Санкт-Петербург</div><div class="country">Северо-Запад · 38</div></div>
-                    </div>
-                    <div class="geo-item" data-city="Новосибирск">
-                        <span class="flag">🇷🇺</span>
-                        <div><div class="region">Новосибирск</div><div class="country">Сибирь · 42</div></div>
-                    </div>
-                    <div class="geo-item" data-city="Екатеринбург">
-                        <span class="flag">🇷🇺</span>
-                        <div><div class="region">Екатеринбург</div><div class="country">Урал · 31</div></div>
-                    </div>
-                    <div class="geo-item" data-city="Казань">
-                        <span class="flag">🇷🇺</span>
-                        <div><div class="region">Казань</div><div class="country">Приволжье · 35</div></div>
-                    </div>
-                    <div class="geo-item" data-city="Красноярск">
-                        <span class="flag">🇷🇺</span>
-                        <div><div class="region">Красноярск</div><div class="country">Сибирь · 18</div></div>
-                    </div>
-                    <div class="geo-item" data-city="Иркутск">
-                        <span class="flag">🇷🇺</span>
-                        <div><div class="region">Иркутск</div><div class="country">Сибирь · 12</div></div>
-                    </div>
-                    <div class="geo-item" data-city="Владивосток">
-                        <span class="flag">🇷🇺</span>
-                        <div><div class="region">Владивосток</div><div class="country">Дальний Восток · 9</div></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-        /* ===== ТОЧКИ ГОРОДОВ (БЕЗ ДРОЖАНИЯ) ===== */
-        .city-point {
-            cursor: pointer;
+        .geo-map-wrapper {
+            background: #F5F7FA;
+            border-radius: 20px;
+            padding: 30px;
+            border: 1px solid var(--gray-border);
+            position: relative;
+            overflow: hidden;
+            min-height: 480px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-image: 
+                linear-gradient(rgba(44, 62, 78, 0.04) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(44, 62, 78, 0.04) 1px, transparent 1px);
+            background-size: 30px 30px;
         }
 
-        /* Хитбокс — невидимая зона для курсора */
-        .city-point .hitbox {
-            fill: transparent;
-            pointer-events: all;
+        /* Карта России как SVG-файл (в графитовой гамме) */
+        .russia-map-bg {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            opacity: 0.85;
+            padding: 20px;
+            z-index: 1;
+            filter: grayscale(1) brightness(0.7) contrast(1.2) sepia(0.15) hue-rotate(180deg);
+            transition: all 0.3s;
         }
 
-        /* Отключаем перехват курсора у всех визуальных элементов */
+        .russia-map-overlay {
+            position: relative;
+            z-index: 2;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .russia-map-svg {
+            width: 100%;
+            height: auto;
+            max-height: 440px;
+            overflow: visible;
+        }
+
+        /* Сеть связей */
+        .network-line {
+            stroke: var(--orange);
+            stroke-width: 1;
+            opacity: 0.25;
+            stroke-dasharray: 4, 4;
+            transition: all 0.3s;
+        }
+        .network-line.active {
+            opacity: 0.9;
+            stroke-dasharray: none;
+            stroke-width: 1.8;
+            filter: drop-shadow(0 0 4px var(--orange));
+        }
+
+        /* Точки городов */
+        .city-point { cursor: pointer; }
+        .city-point .hitbox { fill: transparent; pointer-events: all; }
         .city-point .core,
         .city-point .halo,
         .city-point .ring,
-        .city-point .ray {
-            pointer-events: none;
-        }
-
-        .city-point .core {
-            fill: var(--orange);
-            transition: fill 0.3s ease, stroke 0.3s ease;
-        }
-
-        .city-point .halo {
-            fill: rgba(242, 140, 40, 0.2);
-            animation: haloPulse 3s ease-in-out infinite;
-            transition: fill 0.3s ease;
-        }
-
-        .city-point .ring {
-            fill: none;
-            stroke: var(--orange);
-            stroke-width: 1.5;
-            opacity: 0;
-            animation: ringExpand 3s ease-out infinite;
-        }
-
-        .city-point .ray {
-            stroke: var(--orange);
-            stroke-width: 1.2;
-            opacity: 0.5;
-            animation: rayPulse 3s ease-in-out infinite;
-            transition: opacity 0.3s ease, stroke-width 0.3s ease;
-        }
-        .city-point .ray.diag {
-            stroke-width: 0.8;
-            opacity: 0.3;
-        }
+        .city-point .ray { pointer-events: none; }
+        .city-point .core { fill: var(--orange); transition: fill 0.3s ease, stroke 0.3s ease; }
+        .city-point .halo { fill: rgba(242, 140, 40, 0.2); animation: haloPulse 3s ease-in-out infinite; transition: fill 0.3s ease; }
+        .city-point .ring { fill: none; stroke: var(--orange); stroke-width: 1.5; opacity: 0; animation: ringExpand 3s ease-out infinite; }
+        .city-point .ray { stroke: var(--orange); stroke-width: 1.2; opacity: 0.5; animation: rayPulse 3s ease-in-out infinite; transition: opacity 0.3s ease, stroke-width 0.3s ease; }
+        .city-point .ray.diag { stroke-width: 0.8; opacity: 0.3; }
 
         .city-point:nth-child(2n) .halo { animation-delay: 0.5s; }
         .city-point:nth-child(2n) .ring { animation-delay: 0.5s; }
         .city-point:nth-child(2n) .ray { animation-delay: 0.5s; }
-
         .city-point:nth-child(3n) .halo { animation-delay: 1s; }
         .city-point:nth-child(3n) .ring { animation-delay: 1s; }
         .city-point:nth-child(3n) .ray { animation-delay: 1s; }
 
-        .city-point:hover .core {
-            fill: #FFB74D;
-            stroke: var(--orange);
-            stroke-width: 2;
-        }
-        .city-point:hover .ray {
-            opacity: 1;
-            stroke-width: 1.8;
-        }
-        .city-point:hover .halo {
-            fill: rgba(242, 140, 40, 0.45);
-        }
+        .city-point:hover .core { fill: #FFB74D; stroke: var(--orange); stroke-width: 2; }
+        .city-point:hover .ray { opacity: 1; stroke-width: 1.8; }
+        .city-point:hover .halo { fill: rgba(242, 140, 40, 0.45); }
 
         @keyframes haloPulse {
             0%, 100% { r: 10; opacity: 0.5; }
@@ -489,7 +358,6 @@
             50% { opacity: 0.8; }
         }
 
-        /* Подсказка */
         .geo-tooltip {
             position: absolute;
             background: var(--graphite-dark);
@@ -509,7 +377,6 @@
         .geo-tooltip .city { font-weight: 700; color: var(--orange); display: block; margin-bottom: 3px; }
         .geo-tooltip .info { font-size: 12px; opacity: 0.85; }
 
-        /* Список регионов */
         .geo-list { display: grid; grid-template-columns: 1fr 1fr; gap: 15px 30px; }
         .geo-item {
             display: flex; align-items: center; gap: 12px;
@@ -613,7 +480,7 @@
     </style>
 </head>
 <body>
-
+    
     <!-- ===== ШАПКА ===== -->
     <header class="header">
         <div class="container">
@@ -758,7 +625,7 @@
             </div>
         </div>
     </section>
-
+    
     <!-- ===== ГЕОГРАФИЯ С КАРТОЙ РОССИИ ===== -->
     <section class="section section-alt" id="geo">
         <div class="container">
@@ -767,96 +634,99 @@
             <p class="section-subtitle">38 регионов присутствия. Наведите на точку, чтобы узнать подробности</p>
 
             <div class="geo-grid">
-                        /* Карта России как SVG-файл (в графитовой гамме) */
-        .russia-map-bg {
-            position: absolute;
-            inset: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
-            opacity: 0.85;
-            padding: 20px;
-            z-index: 1;
-            /* Фильтр: перекрашивает цветную SVG-карту в графит */
-            filter: grayscale(1) brightness(0.7) contrast(1.2) sepia(0.15) hue-rotate(180deg);
-            transition: all 0.3s;
-        }
+                <div class="geo-map-wrapper" id="geo-map-wrapper">
+                    <img class="russia-map-bg" src="russia.svg" alt="Карта России" />
+                    
+                    <div class="russia-map-overlay">
+                        <svg class="russia-map-svg" viewBox="0 0 1000 600" xmlns="http://www.w3.org/2000/svg">
+                            <g id="network">
+                                <line class="network-line" data-from="Москва, Зеленоград" data-to="Санкт-Петербург" x1="130" y1="270" x2="136" y2="182" />
+                                <line class="network-line" data-from="Москва, Зеленоград" data-to="Казань" x1="130" y1="270" x2="220" y2="260" />
+                                <line class="network-line" data-from="Москва, Зеленоград" data-to="Екатеринбург" x1="130" y1="270" x2="330" y2="240" />
+                                <line class="network-line" data-from="Москва, Зеленоград" data-to="Новосибирск" x1="130" y1="270" x2="480" y2="240" />
+                                <line class="network-line" data-from="Москва, Зеленоград" data-to="Краснодар" x1="130" y1="270" x2="110" y2="350" />
+                                <line class="network-line" data-from="Санкт-Петербург" data-to="Казань" x1="136" y1="182" x2="220" y2="260" />
+                                <line class="network-line" data-from="Екатеринбург" data-to="Новосибирск" x1="330" y1="240" x2="480" y2="240" />
+                                <line class="network-line" data-from="Новосибирск" data-to="Красноярск" x1="480" y1="240" x2="560" y2="230" />
+                                <line class="network-line" data-from="Красноярск" data-to="Иркутск" x1="560" y1="230" x2="640" y2="240" />
+                                <line class="network-line" data-from="Иркутск" data-to="Владивосток" x1="640" y1="240" x2="820" y2="280" />
+                                <line class="network-line" data-from="Казань" data-to="Екатеринбург" x1="220" y1="260" x2="330" y2="240" />
+                            </g>
 
-                            <!-- Города (координаты подогнаны под картинку ru.jpg) -->
                             <g class="city-point" data-city="Москва, Зеленоград" data-info="Головной офис · 64 установки">
-                                <circle class="hitbox" cx="195" cy="295" r="22" />
-                                <line class="ray" x1="195" y1="277" x2="195" y2="313" />
-                                <line class="ray" x1="177" y1="295" x2="213" y2="295" />
-                                <line class="ray diag" x1="182" y1="282" x2="208" y2="308" />
-                                <line class="ray diag" x1="208" y1="282" x2="182" y2="308" />
-                                <circle class="ring" cx="195" cy="295" r="6" />
-                                <circle class="halo" cx="195" cy="295" r="11" />
-                                <circle class="core" cx="195" cy="295" r="5" />
+                                <circle class="hitbox" cx="130" cy="270" r="22" />
+                                <line class="ray" x1="130" y1="252" x2="130" y2="288" />
+                                <line class="ray" x1="112" y1="270" x2="148" y2="270" />
+                                <line class="ray diag" x1="117" y1="257" x2="143" y2="283" />
+                                <line class="ray diag" x1="143" y1="257" x2="117" y2="283" />
+                                <circle class="ring" cx="130" cy="270" r="6" />
+                                <circle class="halo" cx="130" cy="270" r="11" />
+                                <circle class="core" cx="130" cy="270" r="5" />
                             </g>
                             <g class="city-point" data-city="Санкт-Петербург" data-info="Северо-Запад · 38 установок">
-                                <circle class="hitbox" cx="160" cy="250" r="20" />
-                                <line class="ray" x1="160" y1="235" x2="160" y2="265" />
-                                <line class="ray" x1="145" y1="250" x2="175" y2="250" />
-                                <circle class="ring" cx="160" cy="250" r="5" />
-                                <circle class="halo" cx="160" cy="250" r="9" />
-                                <circle class="core" cx="160" cy="250" r="4" />
+                                <circle class="hitbox" cx="136" cy="182" r="20" />
+                                <line class="ray" x1="136" y1="167" x2="136" y2="197" />
+                                <line class="ray" x1="121" y1="182" x2="151" y2="182" />
+                                <circle class="ring" cx="136" cy="182" r="5" />
+                                <circle class="halo" cx="136" cy="182" r="9" />
+                                <circle class="core" cx="136" cy="182" r="4" />
                             </g>
                             <g class="city-point" data-city="Казань" data-info="Приволжье · 35 установок">
-                                <circle class="hitbox" cx="280" cy="285" r="20" />
-                                <line class="ray" x1="280" y1="270" x2="280" y2="300" />
-                                <line class="ray" x1="265" y1="285" x2="295" y2="285" />
-                                <circle class="ring" cx="280" cy="285" r="5" />
-                                <circle class="halo" cx="280" cy="285" r="9" />
-                                <circle class="core" cx="280" cy="285" r="4" />
+                                <circle class="hitbox" cx="220" cy="260" r="20" />
+                                <line class="ray" x1="220" y1="245" x2="220" y2="275" />
+                                <line class="ray" x1="205" y1="260" x2="235" y2="260" />
+                                <circle class="ring" cx="220" cy="260" r="5" />
+                                <circle class="halo" cx="220" cy="260" r="9" />
+                                <circle class="core" cx="220" cy="260" r="4" />
                             </g>
                             <g class="city-point" data-city="Екатеринбург" data-info="Урал · 31 установка">
-                                <circle class="hitbox" cx="420" cy="260" r="20" />
-                                <line class="ray" x1="420" y1="245" x2="420" y2="275" />
-                                <line class="ray" x1="405" y1="260" x2="435" y2="260" />
-                                <circle class="ring" cx="420" cy="260" r="5" />
-                                <circle class="halo" cx="420" cy="260" r="9" />
-                                <circle class="core" cx="420" cy="260" r="4" />
+                                <circle class="hitbox" cx="330" cy="240" r="20" />
+                                <line class="ray" x1="330" y1="225" x2="330" y2="255" />
+                                <line class="ray" x1="315" y1="240" x2="345" y2="240" />
+                                <circle class="ring" cx="330" cy="240" r="5" />
+                                <circle class="halo" cx="330" cy="240" r="9" />
+                                <circle class="core" cx="330" cy="240" r="4" />
                             </g>
                             <g class="city-point" data-city="Новосибирск" data-info="Сибирь · 42 установки">
-                                <circle class="hitbox" cx="620" cy="250" r="20" />
-                                <line class="ray" x1="620" y1="235" x2="620" y2="265" />
-                                <line class="ray" x1="605" y1="250" x2="635" y2="250" />
-                                <line class="ray diag" x1="610" y1="240" x2="630" y2="260" />
-                                <circle class="ring" cx="620" cy="250" r="5" />
-                                <circle class="halo" cx="620" cy="250" r="9" />
-                                <circle class="core" cx="620" cy="250" r="4" />
+                                <circle class="hitbox" cx="480" cy="240" r="20" />
+                                <line class="ray" x1="480" y1="225" x2="480" y2="255" />
+                                <line class="ray" x1="465" y1="240" x2="495" y2="240" />
+                                <line class="ray diag" x1="470" y1="230" x2="490" y2="250" />
+                                <circle class="ring" cx="480" cy="240" r="5" />
+                                <circle class="halo" cx="480" cy="240" r="9" />
+                                <circle class="core" cx="480" cy="240" r="4" />
                             </g>
                             <g class="city-point" data-city="Красноярск" data-info="Сибирь · 18 установок">
-                                <circle class="hitbox" cx="720" cy="245" r="18" />
-                                <line class="ray" x1="720" y1="232" x2="720" y2="258" />
-                                <line class="ray" x1="707" y1="245" x2="733" y2="245" />
-                                <circle class="ring" cx="720" cy="245" r="4" />
-                                <circle class="halo" cx="720" cy="245" r="8" />
-                                <circle class="core" cx="720" cy="245" r="3.5" />
+                                <circle class="hitbox" cx="560" cy="230" r="18" />
+                                <line class="ray" x1="560" y1="217" x2="560" y2="243" />
+                                <line class="ray" x1="547" y1="230" x2="573" y2="230" />
+                                <circle class="ring" cx="560" cy="230" r="4" />
+                                <circle class="halo" cx="560" cy="230" r="8" />
+                                <circle class="core" cx="560" cy="230" r="3.5" />
                             </g>
                             <g class="city-point" data-city="Иркутск" data-info="Сибирь · 12 установок">
-                                <circle class="hitbox" cx="800" cy="250" r="18" />
-                                <line class="ray" x1="800" y1="237" x2="800" y2="263" />
-                                <line class="ray" x1="787" y1="250" x2="813" y2="250" />
-                                <circle class="ring" cx="800" cy="250" r="4" />
-                                <circle class="halo" cx="800" cy="250" r="8" />
-                                <circle class="core" cx="800" cy="250" r="3.5" />
+                                <circle class="hitbox" cx="640" cy="240" r="18" />
+                                <line class="ray" x1="640" y1="227" x2="640" y2="253" />
+                                <line class="ray" x1="627" y1="240" x2="653" y2="240" />
+                                <circle class="ring" cx="640" cy="240" r="4" />
+                                <circle class="halo" cx="640" cy="240" r="8" />
+                                <circle class="core" cx="640" cy="240" r="3.5" />
                             </g>
                             <g class="city-point" data-city="Владивосток" data-info="Дальний Восток · 9 установок">
-                                <circle class="hitbox" cx="900" cy="290" r="18" />
-                                <line class="ray" x1="900" y1="277" x2="900" y2="303" />
-                                <line class="ray" x1="887" y1="290" x2="913" y2="290" />
-                                <circle class="ring" cx="900" cy="290" r="4" />
-                                <circle class="halo" cx="900" cy="290" r="8" />
-                                <circle class="core" cx="900" cy="290" r="3.5" />
+                                <circle class="hitbox" cx="820" cy="280" r="18" />
+                                <line class="ray" x1="820" y1="267" x2="820" y2="293" />
+                                <line class="ray" x1="807" y1="280" x2="833" y2="280" />
+                                <circle class="ring" cx="820" cy="280" r="4" />
+                                <circle class="halo" cx="820" cy="280" r="8" />
+                                <circle class="core" cx="820" cy="280" r="3.5" />
                             </g>
                             <g class="city-point" data-city="Краснодар" data-info="Юг · 22 установки">
-                                <circle class="hitbox" cx="170" cy="380" r="18" />
-                                <line class="ray" x1="170" y1="367" x2="170" y2="393" />
-                                <line class="ray" x1="157" y1="380" x2="183" y2="380" />
-                                <circle class="ring" cx="170" cy="380" r="4" />
-                                <circle class="halo" cx="170" cy="380" r="8" />
-                                <circle class="core" cx="170" cy="380" r="3.5" />
+                                <circle class="hitbox" cx="110" cy="350" r="18" />
+                                <line class="ray" x1="110" y1="337" x2="110" y2="363" />
+                                <line class="ray" x1="97" y1="350" x2="123" y2="350" />
+                                <circle class="ring" cx="110" cy="350" r="4" />
+                                <circle class="halo" cx="110" cy="350" r="8" />
+                                <circle class="core" cx="110" cy="350" r="3.5" />
                             </g>
                         </svg>
                     </div>
@@ -867,7 +737,6 @@
                     </div>
                 </div>
 
-                <!-- СПИСОК РЕГИОНОВ -->
                 <div class="geo-list" id="geo-list">
                     <div class="geo-item active" data-city="Москва, Зеленоград">
                         <span class="flag">🇷🇺</span>
@@ -978,9 +847,10 @@
             </div>
         </div>
     </footer>
-
+    
     <!-- ===== JS ===== -->
     <script>
+    // Живые цифры в скан-панели
     (function() {
         const noiseEl = document.getElementById('live-noise');
         const xEl = document.getElementById('live-x');
@@ -988,13 +858,16 @@
         if (!noiseEl) return;
         function update() {
             noiseEl.textContent = (0.03 + Math.random() * 0.02).toFixed(2) + ' nm';
-            xEl.textContent = String((40 + Math.random() * 5).toFixed(2)).padStart(6, '0');
-            yEl.textContent = String((15 + Math.random() * 5).toFixed(2)).padStart(6, '0');
+            const x = (40 + Math.random() * 5).toFixed(2);
+            xEl.textContent = String(x).padStart(6, '0');
+            const y = (15 + Math.random() * 5).toFixed(2);
+            yEl.textContent = String(y).padStart(6, '0');
         }
         setInterval(update, 1800);
         update();
     })();
 
+    // Карта России: интерактив
     (function() {
         const wrapper = document.getElementById('geo-map-wrapper');
         const tooltip = document.getElementById('geo-tooltip');
@@ -1008,8 +881,9 @@
         points.forEach(point => {
             point.addEventListener('mouseenter', () => {
                 const city = point.dataset.city;
+                const info = point.dataset.info;
                 cityEl.textContent = city;
-                infoEl.textContent = point.dataset.info;
+                infoEl.textContent = info;
                 
                 const rect = wrapper.getBoundingClientRect();
                 const pointRect = point.getBoundingClientRect();
@@ -1034,8 +908,9 @@
             });
 
             point.addEventListener('click', () => {
+                const city = point.dataset.city;
                 listItems.forEach(item => {
-                    item.classList.toggle('active', item.dataset.city === point.dataset.city);
+                    item.classList.toggle('active', item.dataset.city === city);
                 });
             });
         });
@@ -1048,6 +923,7 @@
         });
     })();
 
+    // Появление при скролле
     (function() {
         const reveals = document.querySelectorAll('.reveal');
         if (!reveals.length) return;
