@@ -356,7 +356,7 @@
             </div>
         </div>
     </section>
-    <!-- ===== ГЕОГРАФИЯ С КАРТОЙ РОССИИ ===== -->
+        <!-- ===== ГЕОГРАФИЯ С КАРТОЙ РОССИИ ===== -->
     <section class="section section-alt" id="geo">
         <div class="container">
             <h2 class="section-title">Наша <span class="accent-color">география</span></h2>
@@ -365,6 +365,89 @@
 
             <div class="geo-grid">
                 <div class="geo-map-wrapper" id="geo-map-wrapper">
+                    <img class="russia-map-bg" src="russia.svg" alt="Карта России" />
+                    <div class="russia-map-overlay">
+                        <svg class="russia-map-svg" viewBox="0 0 950 620" xmlns="http://www.w3.org/2000/svg">
+                            <g id="network">
+                                <line class="network-line" data-from="Москва, Зеленоград" data-to="Санкт-Петербург" x1="130" y1="270" x2="136" y2="182" />
+                                <line class="network-line" data-from="Москва, Зеленоград" data-to="Казань" x1="130" y1="270" x2="220" y2="260" />
+                                <line class="network-line" data-from="Москва, Зеленоград" data-to="Екатеринбург" x1="130" y1="270" x2="330" y2="240" />
+                                <line class="network-line" data-from="Москва, Зеленоград" data-to="Новосибирск" x1="130" y1="270" x2="480" y2="240" />
+                                <line class="network-line" data-from="Москва, Зеленоград" data-to="Краснодар" x1="130" y1="270" x2="110" y2="350" />
+                                <line class="network-line" data-from="Санкт-Петербург" data-to="Казань" x1="136" y1="182" x2="220" y2="260" />
+                                <line class="network-line" data-from="Екатеринбург" data-to="Новосибирск" x1="330" y1="240" x2="480" y2="240" />
+                                <line class="network-line" data-from="Новосибирск" data-to="Красноярск" x1="480" y1="240" x2="560" y2="230" />
+                                <line class="network-line" data-from="Красноярск" data-to="Иркутск" x1="560" y1="230" x2="640" y2="240" />
+                                <line class="network-line" data-from="Иркутск" data-to="Владивосток" x1="640" y1="240" x2="820" y2="280" />
+                            </g>
+
+                            <g class="city-point" data-city="Москва, Зеленоград" data-info="Головной офис · 64 установки">
+                                <circle class="hitbox" cx="130" cy="270" r="22" />
+                                <circle class="halo" cx="130" cy="270" r="11" />
+                                <circle class="core" cx="130" cy="270" r="5" />
+                            </g>
+                            <g class="city-point" data-city="Санкт-Петербург" data-info="Северо-Запад · 38 установок">
+                                <circle class="hitbox" cx="136" cy="182" r="20" />
+                                <circle class="halo" cx="136" cy="182" r="9" />
+                                <circle class="core" cx="136" cy="182" r="4" />
+                            </g>
+                            <g class="city-point" data-city="Казань" data-info="Приволжье · 35 установок">
+                                <circle class="hitbox" cx="220" cy="260" r="20" />
+                                <circle class="halo" cx="220" cy="260" r="9" />
+                                <circle class="core" cx="220" cy="260" r="4" />
+                            </g>
+                            <g class="city-point" data-city="Екатеринбург" data-info="Урал · 31 установка">
+                                <circle class="hitbox" cx="330" cy="240" r="20" />
+                                <circle class="halo" cx="330" cy="240" r="9" />
+                                <circle class="core" cx="330" cy="240" r="4" />
+                            </g>
+                            <g class="city-point" data-city="Новосибирск" data-info="Сибирь · 42 установки">
+                                <circle class="hitbox" cx="480" cy="240" r="20" />
+                                <circle class="halo" cx="480" cy="240" r="9" />
+                                <circle class="core" cx="480" cy="240" r="4" />
+                            </g>
+                            <g class="city-point" data-city="Красноярск" data-info="Сибирь · 18 установок">
+                                <circle class="hitbox" cx="560" cy="230" r="18" />
+                                <circle class="halo" cx="560" cy="230" r="8" />
+                                <circle class="core" cx="560" cy="230" r="3.5" />
+                            </g>
+                            <g class="city-point" data-city="Иркутск" data-info="Сибирь · 12 установок">
+                                <circle class="hitbox" cx="640" cy="240" r="18" />
+                                <circle class="halo" cx="640" cy="240" r="8" />
+                                <circle class="core" cx="640" cy="240" r="3.5" />
+                            </g>
+                            <g class="city-point" data-city="Владивосток" data-info="Дальний Восток · 9 установок">
+                                <circle class="hitbox" cx="820" cy="280" r="18" />
+                                <circle class="halo" cx="820" cy="280" r="8" />
+                                <circle class="core" cx="820" cy="280" r="3.5" />
+                            </g>
+                            <g class="city-point" data-city="Краснодар" data-info="Юг · 22 установки">
+                                <circle class="hitbox" cx="110" cy="350" r="18" />
+                                <circle class="halo" cx="110" cy="350" r="8" />
+                                <circle class="core" cx="110" cy="350" r="3.5" />
+                            </g>
+                        </svg>
+                    </div>
+                    <div class="geo-tooltip" id="geo-tooltip">
+                        <span class="city"></span>
+                        <span class="info"></span>
+                    </div>
+                </div>
+
+                <div class="geo-list" id="geo-list">
+                    <div class="geo-item active" data-city="Москва, Зеленоград"><span class="flag">🇷🇺</span><div><div class="region">Москва, Зеленоград</div><div class="country">Центральный · 64</div></div></div>
+                    <div class="geo-item" data-city="Санкт-Петербург"><span class="flag">🇷🇺</span><div><div class="region">Санкт-Петербург</div><div class="country">Северо-Запад · 38</div></div></div>
+                    <div class="geo-item" data-city="Новосибирск"><span class="flag">🇷🇺</span><div><div class="region">Новосибирск</div><div class="country">Сибирь · 42</div></div></div>
+                    <div class="geo-item" data-city="Екатеринбург"><span class="flag">🇷🇺</span><div><div class="region">Екатеринбург</div><div class="country">Урал · 31</div></div></div>
+                    <div class="geo-item" data-city="Казань"><span class="flag">🇷🇺</span><div><div class="region">Казань</div><div class="country">Приволжье · 35</div></div></div>
+                    <div class="geo-item" data-city="Красноярск"><span class="flag">🇷🇺</span><div><div class="region">Красноярск</div><div class="country">Сибирь · 18</div></div></div>
+                    <div class="geo-item" data-city="Иркутск"><span class="flag">🇷🇺</span><div><div class="region">Иркутск</div><div class="country">Сибирь · 12</div></div></div>
+                    <div class="geo-item" data-city="Владивосток"><span class="flag">🇷🇺</span><div><div class="region">Владивосток</div><div class="country">Дальний Восток · 9</div></div></div>
+                </div>
+            </div>
+        </div>
+    </section>
+               <section class="section section-alt" id="geo">
                     <svg class="russia-svg" viewBox="0 0 950 620" xmlns="http://www.w3.org/2000/svg">
                         <!-- Упрощённый контур России -->
                         <path d="m 130 259 l -0.7 -1.3 -0.8 1.1 -1.2 0.6 -0.4 2 -2.8 -1.2 -1.3 1.3 -1.8 -2 -0.5 2.1 -1.7 0.5 0.5 2.4 1.4 -1.1 1.1 1.3 2.3 -0.1 0.6 -1.4 0.8 1.3 1.6 -0.9 1.6 1.1 2.5 -0.2 0.4 -1.6 -0.8 -2.5 0.3 -1 c -0.8 0.1 -0.8 -0.1 -1.2 -0.4 z" />
